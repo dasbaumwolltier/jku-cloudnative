@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  converter-ui
+  labels:
+    app:  converter-ui
+spec:
+  selector:
+    matchLabels:
+      app: converter-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  converter-ui
+    spec:
+      containers:
+      - name:  converter-ui
+        image:  ghcr.io/dasbaumwolltier/converter-frontend:2022-11-01
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /_status/healthz
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: converter-ui
+              key: DB_HOST
+        ports:
+        - containerPort:  80
+          name:  converter-ui
+        volumeMounts:
+        - name: localtime
+          mountPath: /etc/localtime
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+      restartPolicy: Always
