@@ -7,4 +7,4 @@ patchesStrategicMerge:
   - patches/ingress.yaml
 images:
   - name: ghcr.io/dasbaumwolltier/converter-backend
-    newTag: development-20230111-2025
+    newTag: development-20230111-2029
