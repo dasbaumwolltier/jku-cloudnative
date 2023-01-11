@@ -8,9 +8,20 @@ on:
       - production
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      release_date: ${{ steps.set_date.outputs.date }}
+      environment: ${{ steps.check_environment.outputs.environment }}
+    steps:
+      - id: set_date
+        run: echo "date=$(date +'%Y%m%d-%H%M')" >> $GITHUB_OUTPUT
+      - id: check_environment
+        run: echo "environment=$(echo $GITHUB_REF_NAME)" >> $GITHUB_OUTPUT
+
   build-frontend:
     runs-on: ubuntu-latest
-
+    needs: prepare
     steps:
       - name: Clone
         uses: actions/checkout@v3
@@ -43,7 +54,7 @@ jobs:
 
   build-backend:
     runs-on: ubuntu-latest
-
+    needs: prepare
     steps:
       - name: Clone
         uses: actions/checkout@v3
