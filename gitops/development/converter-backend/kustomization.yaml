@@ -5,4 +5,4 @@ resources:
   - ../../base/converter-backend
 images:
   - name: ghcr.io/dasbaumwolltier/converter-ui
-    newTag: development-20230111-2007
+    newTag: development-20230111-2009
