@@ -6,5 +6,5 @@ resources:
   - ../../base/converter-backend
 
 images:
-  - name: ghcr.io/dasbaumwolltier/converter-ui
+  - name: ghcr.io/dasbaumwolltier/converter-backend
     newTag: 2022-11-01
