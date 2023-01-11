@@ -43,7 +43,7 @@ spec:
           periodSeconds: 10
         ports:
         - containerPort:  80
-          name:  converter-backend
+          name:  converter
         volumeMounts:
         - name: localtime
           mountPath: /etc/localtime
