@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ../../base/converter-backend
+patchesStrategicMerge:
+  - patches/ingress.yaml
 images:
   - name: ghcr.io/dasbaumwolltier/converter-backend
     newTag: development-20230111-2014

@@ -4,7 +4,8 @@ namespace: staging
 
 resources:
   - ../../base/converter-backend
-
+patchesStrategicMerge:
+  - patches/ingress.yaml
 images:
   - name: ghcr.io/dasbaumwolltier/converter-backend
     newTag: 2022-11-01

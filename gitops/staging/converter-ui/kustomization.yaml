@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: staging
 resources:
   - ../../base/converter-ui
+patchesStrategicMerge:
+  - patches/ingress.yaml
 images:
   - name: ghcr.io/dasbaumwolltier/converter-ui
     newTag: 2022-01-01
