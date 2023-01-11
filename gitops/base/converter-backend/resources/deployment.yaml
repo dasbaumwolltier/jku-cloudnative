@@ -15,7 +15,7 @@ spec:
         app:  converter-backend
     spec:
       containers:
-      - name:  converter-backend
+      - name:  converter
         image:  ghcr.io/dasbaumwolltier/converter-backend:2022-11-01
         resources:
           requests:
