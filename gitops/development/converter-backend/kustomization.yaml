@@ -5,4 +5,4 @@ resources:
   - ../../base/converter-ui
 images:
   - name: ghcr.io/dasbaumwolltier/converter-ui
-    newTag: ""
+    newTag: 2022-01-01

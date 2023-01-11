@@ -44,7 +44,7 @@ jobs:
       - name: Set Deployment
         uses: mikefarah/yq@master
         with: 
-          cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-ui/kustomization.yaml
+          cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(tag)' gitops/${{needs.prepare.outputs.environment}}/converter-ui/kustomization.yaml
 
       - name: Upload kustomization.yaml
         uses: actions/upload-artifact@v3
@@ -77,7 +77,7 @@ jobs:
       - name: Set Deployment
         uses: mikefarah/yq@master
         with: 
-          cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-backend/kustomization.yaml
+          cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(tag)' gitops/${{needs.prepare.outputs.environment}}/converter-backend/kustomization.yaml
 
       - name: Upload kustomization.yaml
         uses: actions/upload-artifact@v3
@@ -105,7 +105,7 @@ jobs:
         with:
           name: converter-backend-kustomization-yaml
           path: gitops/${{needs.prepare.outputs.environment}}/converter-backend
-          
+
       - name: Commit deployment Files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
