@@ -4,4 +4,4 @@ metadata:
   name: converter-ui
 spec:
   rules:
-  - host: development.localhost
+  - host: production.localhost
