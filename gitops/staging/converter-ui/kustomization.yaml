@@ -7,4 +7,4 @@ patchesStrategicMerge:
   - patches/ingress.yaml
 images:
   - name: ghcr.io/dasbaumwolltier/converter-ui
-    newTag: 2022-01-01
+    newTag: staging-20230111-2031
