@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  converter-ui
+  name:  converter-backend
   labels:
-    app:  converter-ui
+    app:  converter-backend
 spec:
   selector:
     matchLabels:
-      app: converter-ui
+      app: converter-backend
   replicas: 1
   template:
     metadata:
       labels:
-        app:  converter-ui
+        app:  converter-backend
     spec:
       containers:
-      - name:  converter-ui
-        image:  ghcr.io/dasbaumwolltier/converter-ui:2022-11-01
+      - name:  converter-backend
+        image:  ghcr.io/dasbaumwolltier/converter-backend:2022-11-01
         resources:
           requests:
             cpu: 100m
@@ -43,7 +43,7 @@ spec:
           periodSeconds: 10
         ports:
         - containerPort:  80
-          name:  converter-ui
+          name:  converter-backend
         volumeMounts:
         - name: localtime
           mountPath: /etc/localtime

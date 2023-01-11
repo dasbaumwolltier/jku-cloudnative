@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: converter-backend
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: converter-backend
+            port:
+              number: 8080
