@@ -44,7 +44,7 @@ jobs:
       - name: Set Deployment
         uses: mikefarah/yq@master
         with: 
-          cmd: tag=${{env.TAG_NAME}} yq -i '.spec.template.spec.containers[0].image = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-ui/deployment.yml
+          cmd: tag=${{env.TAG_NAME}} yq -i '.spec.template.spec.containers[0].image = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-ui/kustomization.yml
 
       - name: Commit deployment Files
         uses: stefanzweifel/git-auto-commit-action@v4
