@@ -5,3 +5,12 @@ metadata:
 spec:
   rules:
   - host: development.localhost
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: converter-ui
+            port:
+              number: 80

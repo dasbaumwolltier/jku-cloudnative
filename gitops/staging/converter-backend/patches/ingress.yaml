@@ -5,3 +5,12 @@ metadata:
 spec:
   rules:
   - host: staging.localhost
+    http:
+      paths:
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: converter-backend
+            port:
+              number: 8080

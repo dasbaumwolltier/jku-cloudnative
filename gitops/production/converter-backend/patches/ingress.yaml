@@ -5,3 +5,12 @@ metadata:
 spec:
   rules:
   - host: production.localhost
+    http:
+      paths:
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: converter-backend
+            port:
+              number: 8080
