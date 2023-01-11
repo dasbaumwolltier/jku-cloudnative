@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: converter-development
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dasbaumwolltier/jku-cloudnative/
+    targetRevision: development
+    path: gitops/development/converter-backend
+  destination: 
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: converter-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dasbaumwolltier/jku-cloudnative/
+    targetRevision: staging
+    path: gitops/staging/converter-backend
+  destination: 
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: converter-production
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dasbaumwolltier/jku-cloudnative/
+    targetRevision: production
+    path: gitops/production/converter-backend
+  destination: 
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

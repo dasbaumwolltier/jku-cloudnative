@@ -16,3 +16,5 @@ kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password
 
 # start the GitOps with creation of argo-cd app
 kubectl -n argocd apply -f ./argo-cd/argo-cd-app.yaml
+kubectl -n argocd apply -f ./argo-cd/converter-app.yaml
+kubectl -n argocd apply -f ./argo-cd/converter-ui-app.yaml

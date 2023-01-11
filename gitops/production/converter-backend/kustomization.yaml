@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: production
 
 resources:
-  - ../../base/converter-ui
+  - ../../base/converter-backend
 
 images:
   - name: ghcr.io/dasbaumwolltier/converter-ui
