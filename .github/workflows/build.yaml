@@ -46,11 +46,11 @@ jobs:
         with: 
           cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-ui/kustomization.yaml
 
-      - name: Commit deployment Files
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Upload kustomization.yaml
+        uses: actions/upload-artifact@v3
         with:
-          commit_message: "ci: update deployment"
-          skip_checkout: true
+          name: converter-ui-kustomization-yaml
+          path: gitops/${{needs.prepare.outputs.environment}}/converter-ui/kustomization.yaml
 
   build-backend:
     runs-on: ubuntu-latest
@@ -79,6 +79,33 @@ jobs:
         with: 
           cmd: tag=${{env.TAG_NAME}} yq -i '.images[0].newTag = strenv(image)' gitops/${{needs.prepare.outputs.environment}}/converter-backend/kustomization.yaml
 
+      - name: Upload kustomization.yaml
+        uses: actions/upload-artifact@v3
+        with:
+          name: converter-backend-kustomization-yaml
+          path: gitops/${{needs.prepare.outputs.environment}}/converter-backend/kustomization.yaml
+
+
+  update-kustomizations:
+    runs-on: ubuntu-latest
+    needs: [prepare, build-frontend, build-backend]
+
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Download converter-ui-kustomization-yaml
+        uses: actions/download-artifact@v3
+        with:
+          name: converter-ui-kustomization-yaml
+          path: gitops/${{needs.prepare.outputs.environment}}/converter-ui
+
+      - name: Download converter-backend-kustomization-yaml
+        uses: actions/download-artifact@v3
+        with:
+          name: converter-backend-kustomization-yaml
+          path: gitops/${{needs.prepare.outputs.environment}}/converter-backend
+          
       - name: Commit deployment Files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
